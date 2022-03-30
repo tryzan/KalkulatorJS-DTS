@@ -19,17 +19,21 @@ const updateHasilScreen = () => {
 let currentNum = "0";
 let result = "";
 let concNum = [];
+let op = [];
+let inum = [];
 
 const inputNum = (number) => {
   if (currentNum === "0") {
     currentNum = number;
-    console.log(currentNum);
+    inum.push(number);
   } else if (result > 0 || result < 0) {
     result = "";
     currentNum += number;
+    inum.push(number);
     concNum = [];
   } else {
     currentNum += number;
+    inum.push(number);
   }
 };
 
@@ -42,20 +46,25 @@ numbers.forEach((number) => {
 });
 
 const inputOperator = (operator) => {
-  if (currentNum === "0" && result == 0) {
-    // concNum.pop();
-    // concNum.push(operator);
-    concNum[concNum.length - 1] = operator;
-  } else if (result > 0 || result < 0) {
-    currentNum = "";
-    concNum = [];
-    concNum.push(result.toString());
-    concNum.push(operator);
-    result = "0";
+  if (inum == 0 && result == 0) {
+    console.log("input angka terlebih dahulu");
   } else {
-    concNum.push(currentNum);
-    currentNum = "0";
-    concNum.push(operator);
+    if (currentNum === "0" && result == 0) {
+      concNum[concNum.length - 1] = operator;
+    } else if (result > 0 || result < 0) {
+      currentNum = "";
+      concNum = [];
+      concNum.push(result.toString());
+      concNum.push(operator);
+      op.push(operator);
+      result = "0";
+    } else {
+      concNum.push(currentNum);
+      currentNum = "0";
+      concNum.push(operator);
+      op.push(operator);
+    }
+    console.log(op);
   }
 };
 
@@ -70,59 +79,90 @@ operators.forEach((operator) => {
     // }
   });
 });
-
-const calculate = () => {
-  console.log(currentNum);
+const addlastnum = () => {
   if (currentNum == "") {
-    console.log("kosong");
+    console.log("input kosong");
+  } else if (currentNum >= 0 && op.length == 0) {
+    console.log("tidak bisa menambahkan angka dikarenakan tidak ada operator");
   } else {
     concNum.push(currentNum);
+    op = [];
+    inum = [];
     console.log(concNum);
   }
-
-  while (concNum.length !== 1) {
-    concNum.forEach((number, index) => {
-      if (number === "%") {
-        result = parseFloat(concNum[index - 1]) % parseFloat(concNum[index + 1]);
-        concNum[index - 1] = result;
-        concNum.splice(index, 2);
-      }
-    });
-
-    concNum.forEach((number, index) => {
-      if (number === "*") {
-        result = parseFloat(concNum[index - 1]) * parseFloat(concNum[index + 1]);
-        concNum[index - 1] = result;
-        concNum.splice(index, 2);
-      }
-    });
-    concNum.forEach((number, index) => {
-      if (number === "/") {
-        result = parseFloat(concNum[index - 1]) / parseFloat(concNum[index + 1]);
-        concNum[index - 1] = result;
-        concNum.splice(index, 2);
-      }
-    });
-    concNum.forEach((number, index) => {
-      if (number === "-") {
-        result = parseFloat(concNum[index - 1]) - parseFloat(concNum[index + 1]);
-        concNum[index - 1] = result;
-        concNum.splice(index, 2);
-      }
-    });
-
-    concNum.forEach((number, index) => {
-      if (number === "+") {
-        result = parseFloat(concNum[index - 1]) + parseFloat(concNum[index + 1]);
-        concNum[index - 1] = result;
-        concNum.splice(index, 2);
-      }
-    });
-    break;
-  }
 };
+
+const calculate = () => {
+  if (concNum.length < 3) {
+    console.log("Tidak dapat di operasikan");
+  } else {
+    do {
+      const modulo = concNum.filter((operasi) => {
+        return operasi == "%";
+      });
+      const perkalian = concNum.filter((operasi) => {
+        return operasi == "*";
+      });
+      const pembagian = concNum.filter((operasi) => {
+        return operasi == "/";
+      });
+      const pengurangan = concNum.filter((operasi) => {
+        return operasi == "-";
+      });
+      const pertambahan = concNum.filter((operasi) => {
+        return operasi == "+";
+      });
+      console.log(perkalian.length);
+      if (modulo.length > 0) {
+        concNum.forEach((value, index) => {
+          if (value == "%") {
+            result = parseFloat(concNum[index - 1]) % parseFloat(concNum[index + 1]);
+            concNum[index - 1] = result;
+            concNum.splice(index, 2);
+          }
+        });
+      } else if (perkalian.length > 0) {
+        concNum.forEach((value, index) => {
+          if (value == "*") {
+            result = parseFloat(concNum[index - 1]) * parseFloat(concNum[index + 1]);
+            concNum[index - 1] = result;
+            concNum.splice(index, 2);
+          }
+        });
+      } else if (pembagian.length > 0) {
+        concNum.forEach((value, index) => {
+          if (value == "/") {
+            result = parseFloat(concNum[index - 1]) / parseFloat(concNum[index + 1]);
+            concNum[index - 1] = result;
+            concNum.splice(index, 2);
+          }
+        });
+      } else if (pengurangan.length > 0) {
+        concNum.forEach((value, index) => {
+          if (value == "-") {
+            result = parseFloat(concNum[index - 1]) - parseFloat(concNum[index + 1]);
+            concNum[index - 1] = result;
+            concNum.splice(index, 2);
+          }
+        });
+      } else {
+        concNum.forEach((value, index) => {
+          if (value == "+") {
+            result = parseFloat(concNum[index - 1]) + parseFloat(concNum[index + 1]);
+            concNum[index - 1] = result;
+            concNum.splice(index, 2);
+          }
+        });
+      }
+    } while (concNum.length !== 1);
+  }
+  currentNum = "";
+  console.log(currentNum);
+};
+
 const equalSign = document.querySelector(".equal");
 equalSign.addEventListener("click", () => {
+  addlastnum();
   calculate();
   updateHasilScreen();
 });
@@ -141,8 +181,21 @@ clearBtn.addEventListener("click", () => {
 const inputDecimal = (dot) => {
   if (currentNum.includes(".")) {
     return;
+  } else if (result > 0 && currentNum == 0) {
+    if (result.toString().includes(".")) {
+      console.log("ada");
+      currentNum = currentNum;
+    } else {
+      console.log("sini");
+      result.toString();
+      result += dot;
+      currentNum = result;
+      result = 0;
+      concNum = [];
+    }
+  } else {
+    currentNum += dot;
   }
-  currentNum += dot;
 };
 const decimal = document.querySelector(".dec");
 decimal.addEventListener("click", (event) => {
