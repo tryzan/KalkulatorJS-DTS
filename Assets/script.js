@@ -1,5 +1,8 @@
 const calculatorScreen = document.querySelector(".cal-screen");
 const updateScreen = () => {
+  console.log(currentNum);
+  console.log("ini");
+  console.log(concNum);
   if (concNum.length == 0) {
     calculatorScreen.value = currentNum;
   } else {
@@ -9,11 +12,10 @@ const updateScreen = () => {
     } else {
       calculatorScreen.value = `${concNum.join(" ")} ${currentNum}`;
     }
-    console.log(concNum);
   }
 };
 const updateHasilScreen = () => {
-  currentNum = "";
+  // currentNum = "";
   calculatorScreen.value = `${concNum.join(" ")}`;
 };
 let currentNum = "0";
@@ -83,6 +85,8 @@ const addlastnum = () => {
   if (currentNum == "") {
     console.log("input kosong");
   } else if (currentNum >= 0 && op.length == 0) {
+    currentNum = currentNum;
+    console.log(currentNum);
     console.log("tidak bisa menambahkan angka dikarenakan tidak ada operator");
   } else {
     concNum.push(currentNum);
@@ -94,6 +98,7 @@ const addlastnum = () => {
 
 const calculate = () => {
   if (concNum.length < 3) {
+    console.log(currentNum);
     console.log("Tidak dapat di operasikan");
   } else {
     do {
@@ -156,15 +161,21 @@ const calculate = () => {
       }
     } while (concNum.length !== 1);
   }
-  currentNum = "";
-  console.log(currentNum);
+  // currentNum = "";
 };
 
 const equalSign = document.querySelector(".equal");
 equalSign.addEventListener("click", () => {
   addlastnum();
   calculate();
-  updateHasilScreen();
+  if (result.length !== 0) {
+    console.log("sini gan");
+    updateHasilScreen();
+    currentNum = "";
+  } else {
+    console.log("masuk kesini tapi salah");
+    updateScreen();
+  }
 });
 
 const clearALl = () => {
@@ -185,6 +196,7 @@ const inputDecimal = (dot) => {
     if (result.toString().includes(".")) {
       console.log("ada");
       currentNum = result;
+      console.log(concNum);
     } else {
       console.log("sini");
       result.toString();
@@ -200,5 +212,9 @@ const inputDecimal = (dot) => {
 const decimal = document.querySelector(".dec");
 decimal.addEventListener("click", (event) => {
   inputDecimal(event.target.value);
-  updateScreen();
+  if (result.length !== 0) {
+    updateHasilScreen();
+  } else {
+    updateScreen();
+  }
 });
