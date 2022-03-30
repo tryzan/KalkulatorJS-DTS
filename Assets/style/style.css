@@ -75,11 +75,12 @@ button:active {
 }
 .AC,
 .zero-btn {
-  width: 52%;
+  width: 50%;
 }
 .operator,
 .equal {
   background-color: orange;
+  box-shadow: 0px 5px rgba(240, 140, 19, 0.925);
 }
 .operator {
   margin: 0px 5px 5px 5px;
