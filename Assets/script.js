@@ -102,14 +102,14 @@ const calculate = () => {
     console.log("Tidak dapat di operasikan");
   } else {
     do {
-      const modulo = concNum.filter((operasi) => {
-        return operasi == "%";
-      });
       const perkalian = concNum.filter((operasi) => {
         return operasi == "*";
       });
       const pembagian = concNum.filter((operasi) => {
         return operasi == "/";
+      });
+      const modulo = concNum.filter((operasi) => {
+        return operasi == "%";
       });
       const pengurangan = concNum.filter((operasi) => {
         return operasi == "-";
@@ -117,16 +117,7 @@ const calculate = () => {
       const pertambahan = concNum.filter((operasi) => {
         return operasi == "+";
       });
-      console.log(perkalian.length);
-      if (modulo.length > 0) {
-        concNum.forEach((value, index) => {
-          if (value == "%") {
-            result = parseFloat(concNum[index - 1]) % parseFloat(concNum[index + 1]);
-            concNum[index - 1] = result;
-            concNum.splice(index, 2);
-          }
-        });
-      } else if (perkalian.length > 0) {
+      if (perkalian.length > 0) {
         concNum.forEach((value, index) => {
           if (value == "*") {
             result = parseFloat(concNum[index - 1]) * parseFloat(concNum[index + 1]);
@@ -138,6 +129,14 @@ const calculate = () => {
         concNum.forEach((value, index) => {
           if (value == "/") {
             result = parseFloat(concNum[index - 1]) / parseFloat(concNum[index + 1]);
+            concNum[index - 1] = result;
+            concNum.splice(index, 2);
+          }
+        });
+      } else if (modulo.length > 0) {
+        concNum.forEach((value, index) => {
+          if (value == "%") {
+            result = parseFloat(concNum[index - 1]) % parseFloat(concNum[index + 1]);
             concNum[index - 1] = result;
             concNum.splice(index, 2);
           }
