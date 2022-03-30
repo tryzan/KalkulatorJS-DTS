@@ -181,10 +181,10 @@ clearBtn.addEventListener("click", () => {
 const inputDecimal = (dot) => {
   if (currentNum.includes(".")) {
     return;
-  } else if (result > 0 && currentNum == 0) {
+  } else if ((result > 0 && currentNum == 0) || (result < 0 && currentNum == 0)) {
     if (result.toString().includes(".")) {
       console.log("ada");
-      currentNum = currentNum;
+      currentNum = result;
     } else {
       console.log("sini");
       result.toString();
