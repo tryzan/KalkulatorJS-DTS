@@ -1,0 +1,85 @@
+@media screen and (min-width: 320px) and (max-width: 480px) {
+  .container {
+    margin-top: 30px;
+  }
+  .cal-screen {
+    height: 60px;
+  }
+  .calculator {
+    width: 65%;
+  }
+  .title h1 {
+    font-size: 19px;
+  }
+  .title p {
+    font-size: 12px;
+  }
+  button {
+    font-size: 17px;
+  }
+}
+@media screen and (min-width: 480px) and (max-width: 768px) {
+  .container {
+    margin: 25px;
+  }
+  .calculator {
+    width: 75%;
+  }
+  .title h1 {
+    font-size: 30px;
+  }
+  .title p {
+    font-size: 13px;
+  }
+  button {
+    font-size: 20px;
+  }
+  button:active {
+    background-color: darkgray !important;
+  }
+  .operator:active,
+  .equal:active {
+    background-color: darkorange !important;
+  }
+}
+@media screen and (min-width: 769px) and (max-width: 1023px) {
+  .container {
+    margin: 25px;
+  }
+  .calculator {
+    width: 60%;
+  }
+  .title h1 {
+    font-size: 30px;
+  }
+  .title p {
+    font-size: 13px;
+  }
+  button {
+    font-size: 20px;
+  }
+  button:active {
+    background-color: darkgray !important;
+  }
+  .operator:active,
+  .equal:active {
+    background-color: darkorange !important;
+  }
+}
+@media screen and (min-width: 1024px) and (max-width: 1299px) {
+  .container {
+    margin: 25px;
+  }
+  .calculator {
+    width: 60%;
+  }
+  .title h1 {
+    font-size: 30px;
+  }
+  .title p {
+    font-size: 13px;
+  }
+  button {
+    font-size: 20px;
+  }
+}

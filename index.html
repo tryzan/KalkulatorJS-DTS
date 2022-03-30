@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KalkulatorJavascript</title>
+    <link rel="stylesheet" href="Assets/style/style.css" />
+    <link rel="stylesheet" href="Assets/style/responsive.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com/%22%3E" />
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Jura:wght@700&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="calculator">
+        <div class="title">
+          <h1>Advance Calculator</h1>
+          <p>Calculate more than 2 number</p>
+        </div>
+        <input type="text" class="cal-screen" value="0" disabled />
+        <div class="cal-item">
+          <div class="row">
+            <button class="AC">AC</button>
+            <button class="operator" id="op" value="%">Mod</button>
+            <button class="operator" value="/">&divide;</button>
+          </div>
+          <div class="row">
+            <button class="num" value="7">7</button>
+            <button class="num" value="8">8</button>
+            <button class="num" value="9">9</button>
+            <button class="operator" value="*">&times;</button>
+          </div>
+          <div class="row">
+            <button class="num" value="4">4</button>
+            <button class="num" value="5">5</button>
+            <button class="num" value="6">6</button>
+            <button class="operator" value="-">-</button>
+          </div>
+          <div class="row">
+            <button class="num" value="1">1</button>
+            <button class="num" value="2">2</button>
+            <button class="num" value="3">3</button>
+            <button class="operator" value="+">+</button>
+          </div>
+          <div class="row">
+            <button class="num zero-btn" value="0">0</button>
+            <button class="dec" value=".">.</button>
+            <button class="equal" value="=">=</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript" src="Assets/script.js"></script>
+  </body>
+</html>
