@@ -4,7 +4,6 @@ const updateScreen = () => {
     calculatorScreen.value = currentNum;
   } else {
     if (concNum[0] == 0) {
-      console.log("conckosong");
       // currentNum ='0'
       calculatorScreen.value = `${currentNum}`;
       concNum = [];
