@@ -1,12 +1,11 @@
 const calculatorScreen = document.querySelector(".cal-screen");
 const updateScreen = () => {
-  console.log(currentNum);
-  console.log("ini");
-  console.log(concNum);
   if (concNum.length == 0) {
     calculatorScreen.value = currentNum;
   } else {
     if (concNum[0] == 0) {
+      console.log("conckosong");
+      // currentNum ='0'
       calculatorScreen.value = `${currentNum}`;
       concNum = [];
     } else {
@@ -51,7 +50,7 @@ const inputOperator = (operator) => {
   if (inum == 0 && result == 0) {
     console.log("input angka terlebih dahulu");
   } else {
-    if (currentNum === "0" && result == 0) {
+    if (currentNum === "" && result == 0) {
       concNum[concNum.length - 1] = operator;
     } else if (result > 0 || result < 0) {
       currentNum = "";
@@ -62,7 +61,7 @@ const inputOperator = (operator) => {
       result = "0";
     } else {
       concNum.push(currentNum);
-      currentNum = "0";
+      currentNum = "";
       concNum.push(operator);
       op.push(operator);
     }
@@ -169,6 +168,9 @@ equalSign.addEventListener("click", () => {
   calculate();
   if (result.length !== 0) {
     console.log("sini gan");
+    console.log(result);
+    console.log(currentNum);
+    console.log(concNum);
     updateHasilScreen();
     currentNum = "";
   } else {
@@ -195,12 +197,14 @@ const inputDecimal = (dot) => {
     if (result.toString().includes(".")) {
       console.log("ada");
       currentNum = result;
+      concNum = [];
       console.log(concNum);
     } else {
       console.log("sini");
       result.toString();
       result += dot;
       currentNum = result;
+      console.log(result);
       result = 0;
       concNum = [];
     }
@@ -211,9 +215,12 @@ const inputDecimal = (dot) => {
 const decimal = document.querySelector(".dec");
 decimal.addEventListener("click", (event) => {
   inputDecimal(event.target.value);
-  if (result.length !== 0) {
-    updateHasilScreen();
-  } else {
-    updateScreen();
-  }
+  // if (result.length !== 0) {
+  //   console.log('kesini lg gan')
+  //   console.log(result)
+  //   console.log(concNum)
+  //   updateHasilScreen();
+  // } else {
+  updateScreen();
+  // }
 });
